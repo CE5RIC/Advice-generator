@@ -28,7 +28,7 @@ function App() {
       <div className="app">
     <div className="container">
       <h1>{text.id}</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, minus!</p>
+      <p>{text.advice}</p>
 
       <picture>
         <source media="(min-width: 768px)" srcSet={imageDesktop}/>

@@ -1,11 +1,33 @@
+import {useState, useEffect} from "react";
+
 import imageDesktop from "./images/pattern-divider-desktop.svg"
 import imageMobile from "./images/pattern-divider-mobile.svg"
 import dice from "./images/icon-dice.svg"
 
 function App() {
+  const [text, setText] = useState([]);
+
+  const fetchAdvice = async () => {
+    const res = await fetch("https://api.adviceslip.com/advice");
+    const data = await res.json();
+    console.log(data);
+
+    setText(data.slip);
+
+    console.log(text);
+  }
+
+  useEffect(() => {
+    fetchAdvice()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+
   return (
+      <div className="app">
     <div className="container">
-      <h1>lorem, ipsum</h1>
+      <h1>{text.id}</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, minus!</p>
 
       <picture>
@@ -13,11 +35,12 @@ function App() {
         <img src={imageMobile} alt=""/>
       </picture>
         <div>
-            <button>
+            <button onClick={fetchAdvice}>
                 <img src={dice} alt="" />
             </button>
         </div>
     </div>
+      </div>
   );
 }
 
